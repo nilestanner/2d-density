@@ -13,6 +13,10 @@
     "grid",
     "spacing"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nilestanner/2d-density.git"
+  }
   "author": "Niles Tanner",
   "license": "ISC"
 }
