@@ -156,23 +156,23 @@ describe('Test cases for grid-density', () => {
     //   expect(result.percent).toBe(0.5);
     // });
     //
-    // it('should work for 99 x 3', () => {
-    //   const result = gridDensity.findPercentFull(99, 3, 3);
-    //   expect(result.count).toBe(60);
-    //   expect(result.percent).toBe(60/297);
-    // });
+    it('should work for 99 x 3', () => {
+      const result = gridDensity.findPercentFull(99, 3, 3);
+      expect(result.count).toBe(60);
+      expect(result.percent).toBe(60/297);
+    });
+
+    it('should work for 3 x 99', () => {
+      const result = gridDensity.findPercentFull(3, 99, 3);
+      expect(result.count).toBe(60);
+      expect(result.percent).toBe(60/297);
+    });
     //
-    // it('should work for 3 x 99', () => {
-    //   const result = gridDensity.findPercentFull(3, 99, 3);
-    //   expect(result.count).toBe(60);
-    //   expect(result.percent).toBe(60/297);
-    // });
-    //
-    // it('should work for large grids', () => {
-    //   const result = gridDensity.findPercentFull(1000000,1000000,2);
-    //   expect(result.count).toBe(200000000000);
-    //   expect(result.percent).toBe(0.2);
-    // });
+    it('should work for large grids', () => {
+      const result = gridDensity.findPercentFull(1000000,1000000,3);
+      expect(result.count).toBe(200000000000);
+      expect(result.percent).toBe(0.2);
+    });
   });
 
 });
