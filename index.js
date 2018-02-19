@@ -25,6 +25,7 @@ const findPercentFull = (width, height, spacing) => {
   let count = 0;
 
   if (width > squareSize * 2 && height > squareSize * 2) {
+    // Calculate large grid
     const sqCountWidth = Math.floor(width/squareSize) - 1;
     const sqCountHeight = Math.floor(height/squareSize) - 1;
     const numberOfSquares = sqCountWidth * sqCountHeight;
@@ -60,7 +61,24 @@ const findPercentFull = (width, height, spacing) => {
       width: width - (squareSize * sqCountWidth),
       height: height - (squareSize * sqCountHeight)
     });
-
+  } else if (height === 1) {
+    // Grid is completely linear
+    count = Math.ceil(width/spacing);
+  } else if (height < squareSize) {
+    // Grid is too short for normal algorithm
+    const blockWidth = findShortSubSquare(spacing, height);
+    const blockNum = Math.floor(width/blockWidth);
+    let remainerBlockCount;
+    if ((width % blockWidth)) {
+      if (((width % blockWidth) + height) - 1 > spacing) {
+        remainerBlockCount = 2;
+      } else {
+        remainerBlockCount = 1;
+      }
+    } else {
+      remainerBlockCount = 0;
+    }
+    count = (blockNum * 2) + remainerBlockCount;
   } else {
     count = processGrid({
       insertHop,
@@ -108,6 +126,10 @@ const insertIntoGrid = (posx, posy, grid, config) => {
   if (bottomRightposx < config.width && bottomRightposy < config.height && !grid[bottomRightposx][bottomRightposy]){
     insertIntoGrid(bottomRightposx, bottomRightposy, grid, config);
   }
+};
+
+const findShortSubSquare = (spacing, height) => {
+  return Math.max((spacing - height) * 2, spacing);
 };
 
 const findSubSquare = (spacing) => {
