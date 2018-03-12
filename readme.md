@@ -41,6 +41,7 @@ Spacing does not count diagonals. Thus a cell that is diagonally adjacent is rea
 Say you have a grid with a width of 5 and a height of 4 and you want to fill cells that are 2 away from each other. You might end up with something like this:
 
 | x |   | x |   | x |
+|---|---|---|---|---|
 |   | x |   | x |   |
 | x |   | x |   | x |
 |   | x |   | x |   |
@@ -50,6 +51,7 @@ The count would be 10 and percentage full would be 0.5. This would be pretty eas
 For example a 5 by 5 grid with spacing of 3.
 
 | x |   |   |   |   |
+|---|---|---|---|---|
 |   |   |   | x |   |
 |   | x |   |   |   |
 |   |   |   |   | x |
