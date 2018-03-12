@@ -1,6 +1,6 @@
 {
   "name": "2d-density",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Calulates how full a grid will be if each item is spaced out by a given amount",
   "main": "index.js",
   "scripts": {
