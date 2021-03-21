@@ -3,7 +3,7 @@
 An algorithm than can be used to find the maximum number of cells that can fit into a grid with a predefined spacing. In other words two-dimensional density.
 
 ## Build Status
-[![CircleCI](https://circleci.com/gh/nilestanner/2d-density/tree/master.svg?style=svg)](https://circleci.com/gh/nilestanner/2d-density/tree/master)
+[![Node.js CI](https://github.com/nilestanner/2d-density/actions/workflows/node.js.yml/badge.svg)](https://github.com/nilestanner/2d-density/actions/workflows/node.js.yml)
 
 ## Install
 
