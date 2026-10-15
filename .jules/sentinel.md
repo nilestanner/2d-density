@@ -1,0 +1,4 @@
+## 2024-05-24 - Missing Input Validation Leading to DoS and Invalid State
+**Vulnerability:** The `findPercentFull` function in `index.js` lacked input validation for `width`, `height`, and `spacing` arguments, allowing arbitrary values like negative numbers, non-integers, strings, and zero to be passed.
+**Learning:** This could lead to memory exhaustion / DoS when large floats were converted implicitly in calculations, or when zero/negative inputs resulted in infinity/NaN values causing unhandled TypeErrors downstream. This highlights a classic case of missing input validation on parameters meant for mathematical/algorithmic use.
+**Prevention:** Always validate boundaries and types of all inputs (especially for recursive array allocation algorithms) by asserting they are positive integers before doing any grid allocations.

@@ -1,5 +1,12 @@
 
 const findPercentFull = (width, height, spacing) => {
+  if (!Number.isInteger(width) || !Number.isInteger(height) || !Number.isInteger(spacing)) {
+    throw new TypeError('Width, height, and spacing must be integers');
+  }
+  if (width <= 0 || height <= 0 || spacing <= 0) {
+    throw new RangeError('Width, height, and spacing must be positive integers');
+  }
+
   if (spacing === 1) {
     return {
       count: width * height,
