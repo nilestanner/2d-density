@@ -175,6 +175,25 @@ describe('Test cases for grid-density', () => {
     });
   });
 
+  describe('Input validation test cases', () => {
+    it('should throw TypeError for non-integer inputs', () => {
+      expect(() => gridDensity.findPercentFull('a', 'b', 'c')).toThrowError(TypeError, 'Width, height, and spacing must be integers');
+      expect(() => gridDensity.findPercentFull(10.5, 10, 10)).toThrowError(TypeError, 'Width, height, and spacing must be integers');
+      expect(() => gridDensity.findPercentFull(10, 10.5, 10)).toThrowError(TypeError, 'Width, height, and spacing must be integers');
+      expect(() => gridDensity.findPercentFull(10, 10, 10.5)).toThrowError(TypeError, 'Width, height, and spacing must be integers');
+      expect(() => gridDensity.findPercentFull(null, undefined, {})).toThrowError(TypeError, 'Width, height, and spacing must be integers');
+    });
+
+    it('should throw RangeError for non-positive inputs', () => {
+      expect(() => gridDensity.findPercentFull(-1, 10, 10)).toThrowError(RangeError, 'Width, height, and spacing must be positive integers');
+      expect(() => gridDensity.findPercentFull(10, -1, 10)).toThrowError(RangeError, 'Width, height, and spacing must be positive integers');
+      expect(() => gridDensity.findPercentFull(10, 10, -1)).toThrowError(RangeError, 'Width, height, and spacing must be positive integers');
+      expect(() => gridDensity.findPercentFull(0, 10, 10)).toThrowError(RangeError, 'Width, height, and spacing must be positive integers');
+      expect(() => gridDensity.findPercentFull(10, 0, 10)).toThrowError(RangeError, 'Width, height, and spacing must be positive integers');
+      expect(() => gridDensity.findPercentFull(10, 10, 0)).toThrowError(RangeError, 'Width, height, and spacing must be positive integers');
+    });
+  });
+
   describe('Test cases for spacing 4', () => {
     it('should work for 1 x 1', () => {
       const result = gridDensity.findPercentFull(1, 1, 4);
