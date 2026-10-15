@@ -1,0 +1,3 @@
+## 2023-10-25 - Traversal coverage
+**Learning:** Found that recursive traversal function `insertIntoGrid` had one uncovered line: the top-left check at line 109. This occurs because testing small uniform grids never forces the top-left branch since iteration starts at 0,0 and generally moves right/down. It requires a slightly larger non-square grid like 10x6 with spacing 3 to force the bottom-right hops to eventually spawn a top-left hop that lands inside the boundary.
+**Action:** Adding a test for `findPercentFull(10, 6, 3)` cleanly triggers the top-left check and brings statement/line coverage to 100%.
