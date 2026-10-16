@@ -145,22 +145,25 @@ const findSubSquare = (spacing) => {
 
 const countGrid = (grid) => {
   let count  = 0;
-  grid.forEach((row) => {
-    row.forEach((cell) => {
-      if (cell) {
+  // ⚡ Bolt: Use standard for loops instead of nested Array.forEach for performance
+  for (let i = 0; i < grid.length; i++) {
+    const row = grid[i];
+    for (let j = 0; j < row.length; j++) {
+      if (row[j]) {
         count ++;
       }
-    });
-  });
+    }
+  }
   return count;
 };
 
 const createGrid = (width, height) => {
-  return Array(width).fill(1).map((i) => {
-    return Array(height).fill(1).map((j) => {
-      return 0;
-    });
-  });
+  // ⚡ Bolt: Use standard for loop and array pre-allocation instead of chained Array.map operations
+  const grid = new Array(width);
+  for (let i = 0; i < width; i++) {
+    grid[i] = new Array(height).fill(0);
+  }
+  return grid;
 };
 
 module.exports = {
