@@ -1,0 +1,4 @@
+## 2026-10-16 - Add input validation to prevent Denial of Service
+**Vulnerability:** The `findPercentFull` function in `index.js` accepted negative, zero, and invalid type inputs. This lack of validation lead to Denial of Service (DoS) due to unhandled exceptions like maximum call stack size exceeded, infinite loops/heap out of memory, or `TypeError: Cannot set properties of undefined`.
+**Learning:** Math-heavy utility functions must validate input types and constraints immediately to avoid breaking algorithmic assumptions that lead to process crashes or heavy CPU/Memory usage.
+**Prevention:** Always validate all inputs (`width`, `height`, `spacing`) strictly verifying both the type (e.g. `typeof === 'number'`) and mathematical constraints (`> 0` and `Number.isInteger()`) before executing unbounded looping or recursive operations.
