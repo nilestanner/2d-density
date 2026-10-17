@@ -143,24 +143,27 @@ const findSubSquare = (spacing) => {
   return squareWidth;
 };
 
+// Bolt: Optimized array counting using standard for loops instead of nested forEach to reduce overhead
 const countGrid = (grid) => {
-  let count  = 0;
-  grid.forEach((row) => {
-    row.forEach((cell) => {
-      if (cell) {
-        count ++;
+  let count = 0;
+  for (let i = 0, len = grid.length; i < len; i++) {
+    const row = grid[i];
+    for (let j = 0, rLen = row.length; j < rLen; j++) {
+      if (row[j]) {
+        count++;
       }
-    });
-  });
+    }
+  }
   return count;
 };
 
+// Bolt: Optimized grid creation using pre-allocated arrays and standard loops instead of chained map/fill
 const createGrid = (width, height) => {
-  return Array(width).fill(1).map((i) => {
-    return Array(height).fill(1).map((j) => {
-      return 0;
-    });
-  });
+  const grid = new Array(width);
+  for (let i = 0; i < width; i++) {
+    grid[i] = new Array(height).fill(0);
+  }
+  return grid;
 };
 
 module.exports = {
