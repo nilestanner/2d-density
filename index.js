@@ -1,5 +1,10 @@
 
 const findPercentFull = (width, height, spacing) => {
+  if (!Number.isInteger(width) || width <= 0 ||
+      !Number.isInteger(height) || height <= 0 ||
+      !Number.isInteger(spacing) || spacing <= 0) {
+    throw new Error('Width, height, and spacing must be positive integers');
+  }
   if (spacing === 1) {
     return {
       count: width * height,
@@ -95,6 +100,10 @@ const findPercentFull = (width, height, spacing) => {
 };
 
 const processGrid = (config, type) => {
+  // Prevent memory exhaustion Denial of Service (DoS) for excessively large grids
+  if (config.width * config.height > 10000000) {
+    throw new Error('Grid dimensions exceed maximum allowed size for memory allocation');
+  }
   let grid = createGrid(config.width, config.height);
   insertIntoGrid(0, 0, grid, config);
   return countGrid(grid);

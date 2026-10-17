@@ -1,0 +1,4 @@
+## 2024-05-24 - Missing Input Validation Leading to DoS via Memory Exhaustion (OOM)
+**Vulnerability:** The library accepted non-integers, negative numbers, and excessively large numbers for grid dimensions. If dimensions were set extremely large, array allocations in `createGrid` would consume all available memory and crash the application, constituting a Denial of Service (DoS) vulnerability.
+**Learning:** Numerical calculation libraries must always limit the size of data structures they allocate, particularly if user input can control the dimensions, since naive array creation based on unchecked constraints allows trivial OOM crashes.
+**Prevention:** Always validate and bound user inputs (e.g. `Number.isInteger`, `> 0`) before using them in allocations, and implement maximum thresholds for large computational allocations based on realistic memory limits.
