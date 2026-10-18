@@ -144,23 +144,27 @@ const findSubSquare = (spacing) => {
 };
 
 const countGrid = (grid) => {
-  let count  = 0;
-  grid.forEach((row) => {
-    row.forEach((cell) => {
-      if (cell) {
-        count ++;
+  let count = 0;
+  // Standard loop for better performance over grid.forEach
+  for (let i = 0, len1 = grid.length; i < len1; i++) {
+    const row = grid[i];
+    for (let j = 0, len2 = row.length; j < len2; j++) {
+      if (row[j]) {
+        count++;
       }
-    });
-  });
+    }
+  }
   return count;
 };
 
 const createGrid = (width, height) => {
-  return Array(width).fill(1).map((i) => {
-    return Array(height).fill(1).map((j) => {
-      return 0;
-    });
-  });
+  // Pre-allocate array and use standard loops for better performance
+  // Avoids chained .fill().map() overhead
+  const grid = new Array(width);
+  for (let i = 0; i < width; i++) {
+    grid[i] = new Array(height).fill(0);
+  }
+  return grid;
 };
 
 module.exports = {
