@@ -231,4 +231,12 @@ describe('Test cases for grid-density', () => {
     });
   });
 
+  describe('Test cases for spacing 5', () => {
+    it('should work for 15 x 15', () => {
+      const result = gridDensity.findPercentFull(15, 15, 5);
+      expect(result.count).toBe(18);
+      expect(result.percent).toBe(0.08);
+    });
+  });
+
 });
