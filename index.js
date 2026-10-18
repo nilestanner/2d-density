@@ -1,5 +1,11 @@
 
 const findPercentFull = (width, height, spacing) => {
+  if (!Number.isInteger(width) || width <= 0 ||
+      !Number.isInteger(height) || height <= 0 ||
+      !Number.isInteger(spacing) || spacing <= 0) {
+    throw new Error('width, height, and spacing must be positive integers');
+  }
+
   if (spacing === 1) {
     return {
       count: width * height,
@@ -156,6 +162,9 @@ const countGrid = (grid) => {
 };
 
 const createGrid = (width, height) => {
+  if (width * height > 25000000) {
+    throw new Error('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
+  }
   return Array(width).fill(1).map((i) => {
     return Array(height).fill(1).map((j) => {
       return 0;
