@@ -1,0 +1,4 @@
+## 2026-10-19 - Unconstrained Array Allocation leading to DoS
+**Vulnerability:** The `createGrid` function allocated nested arrays using unconstrained `width` and `height` parameters derived directly from inputs. Extremely large dimensions triggered "JavaScript heap out of memory" (OOM) errors, making the application vulnerable to Denial of Service (DoS) attacks.
+**Learning:** Functions that dynamically allocate large data structures based on input values must have upper bounds or "circuit breakers." V8 engine memory limits can be easily reached when creating arrays of arrays without bounds checking.
+**Prevention:** Always implement size limits and validate constraints (e.g., maximum width * height) before performing memory-intensive operations to ensure the application fails securely without crashing the process.

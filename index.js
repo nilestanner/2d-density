@@ -156,6 +156,9 @@ const countGrid = (grid) => {
 };
 
 const createGrid = (width, height) => {
+  if (width * height > 100000000) {
+    throw new Error('Grid dimensions exceed maximum allowed size for memory allocation.');
+  }
   return Array(width).fill(1).map((i) => {
     return Array(height).fill(1).map((j) => {
       return 0;

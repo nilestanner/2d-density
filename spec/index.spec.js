@@ -229,6 +229,12 @@ describe('Test cases for grid-density', () => {
       expect(result.count).toBe(125000000000);
       expect(result.percent).toBe(0.125);
     });
+
+    it('should throw an error for excessively large grids to prevent OOM', () => {
+      expect(() => {
+        gridDensity.findPercentFull(20000, 20000, 20000);
+      }).toThrowError('Grid dimensions exceed maximum allowed size for memory allocation.');
+    });
   });
 
 });
