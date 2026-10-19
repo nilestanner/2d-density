@@ -1,0 +1,3 @@
+## 2026-10-19 - Array map and forEach chaining is slow
+**Learning:** Chained operations like `Array(n).fill(1).map(...)` create unnecessary intermediate arrays, blocking performance in high-frequency array initializations (like grid generation). Similarly, `Array.forEach()` iterations have noticeable function invocation overhead in nested loops compared to traditional `for` loops.
+**Action:** Use pre-allocated arrays combined with a single `for` loop for multidimensional array initialization (`new Array(n).fill(0)` in a loop). For high-frequency count or lookup loops in JS, use traditional standard `for` loops for iteration instead of standard `.forEach()`.
