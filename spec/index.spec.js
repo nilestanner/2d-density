@@ -175,6 +175,68 @@ describe('Test cases for grid-density', () => {
     });
   });
 
+  describe('Test cases for spacing 5', () => {
+    it('should work for 1 x 1', () => {
+      const result = gridDensity.findPercentFull(1, 1, 5);
+      expect(result.count).toBe(1);
+      expect(result.percent).toBe(1);
+    });
+
+    it('should work for 2 x 2', () => {
+      const result = gridDensity.findPercentFull(2, 2, 5);
+      expect(result.count).toBe(1);
+      expect(result.percent).toBe(0.25);
+    });
+
+    it('should work for 5 x 5', () => {
+      const result = gridDensity.findPercentFull(5, 5, 5);
+      expect(result.count).toBe(2);
+      expect(result.percent).toBe(0.08);
+    });
+
+    it('should work for 15 x 15', () => {
+      const result = gridDensity.findPercentFull(15, 15, 5);
+      expect(result.count).toBe(18);
+      expect(result.percent).toBe(0.08);
+    });
+
+    it('should work for 100 x 100', () => {
+      const result = gridDensity.findPercentFull(100, 100, 5);
+      expect(result.count).toBe(769);
+      expect(result.percent).toBe(0.0769);
+    });
+
+    it('should work for 1 x 100', () => {
+      const result = gridDensity.findPercentFull(1, 100, 5);
+      expect(result.count).toBe(20);
+      expect(result.percent).toBe(0.2);
+    });
+
+    it('should work for 100 x 1', () => {
+      const result = gridDensity.findPercentFull(100, 1, 5);
+      expect(result.count).toBe(20);
+      expect(result.percent).toBe(0.2);
+    });
+
+    it('should work for 99 x 3', () => {
+      const result = gridDensity.findPercentFull(99, 3, 5);
+      expect(result.count).toBe(40);
+      expect(result.percent).toBe(40/297);
+    });
+
+    it('should work for 3 x 99', () => {
+      const result = gridDensity.findPercentFull(3, 99, 5);
+      expect(result.count).toBe(40);
+      expect(result.percent).toBe(40/297);
+    });
+    //
+    it('should work for large grids', () => {
+      const result = gridDensity.findPercentFull(1000000, 1000000, 5);
+      expect(result.count).toBe(76923076924);
+      expect(result.percent).toBe(76923076924/1000000000000);
+    });
+  });
+
   describe('Test cases for spacing 4', () => {
     it('should work for 1 x 1', () => {
       const result = gridDensity.findPercentFull(1, 1, 4);
