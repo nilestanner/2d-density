@@ -231,4 +231,12 @@ describe('Test cases for grid-density', () => {
     });
   });
 
+  describe('Test cases for larger recursive spacing bounds', () => {
+    it('should evaluate the top-left bounds check in insertIntoGrid', () => {
+      // As per the project memory, using 15x15 grid with spacing 5 covers the remaining boundary checks
+      const result = gridDensity.findPercentFull(15, 15, 5);
+      expect(result.count).toBe(18);
+      expect(result.percent).toBe(0.08);
+    });
+  });
 });
