@@ -167,6 +167,14 @@ describe('Test cases for grid-density', () => {
       expect(result.count).toBe(66);
       expect(result.percent).toBe(66/297);
     });
+
+    it('should work for intermediate rectangular grids (10 x 6)', () => {
+      const result = gridDensity.findPercentFull(10, 6, 3);
+      expect(result.count).toBe(12);
+      expect(result.percent).toBe(12/60);
+    });
+
+
     //
     it('should work for large grids', () => {
       const result = gridDensity.findPercentFull(1000000,1000000,3);
@@ -223,6 +231,14 @@ describe('Test cases for grid-density', () => {
       expect(result.count).toBe(50);
       expect(result.percent).toBe(50/297);
     });
+
+    it('should work for intermediate rectangular grids (10 x 6)', () => {
+      const result = gridDensity.findPercentFull(10, 6, 4);
+      expect(result.count).toBe(8);
+      expect(result.percent).toBe(8/60);
+    });
+
+
     //
     it('should work for large grids', () => {
       const result = gridDensity.findPercentFull(1000000, 1000000, 4);
