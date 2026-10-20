@@ -156,6 +156,13 @@ const countGrid = (grid) => {
 };
 
 const createGrid = (width, height) => {
+  // Prevent OOM DoS vulnerability by limiting array allocation size
+  if (typeof width !== 'number' || typeof height !== 'number' || isNaN(width) || isNaN(height)) {
+    throw new Error('Grid dimensions must be valid numbers');
+  }
+  if (width > 10000 || height > 10000) {
+    throw new Error('Grid dimensions exceed safe memory allocation limits');
+  }
   return Array(width).fill(1).map((i) => {
     return Array(height).fill(1).map((j) => {
       return 0;
