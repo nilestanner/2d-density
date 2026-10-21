@@ -164,7 +164,10 @@ const countGrid = (grid) => {
 };
 
 const createGrid = (width, height) => {
-  if (width * height > 25000000) {
+  if (typeof width !== 'number' || isNaN(width) || typeof height !== 'number' || isNaN(height)) {
+    throw new Error('Grid dimensions must be valid numbers');
+  }
+  if (width > 25000000 || height > 25000000 || width * height > 25000000) {
     throw new Error('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
   }
   // Pre-allocate array and use standard loops for better performance.
@@ -177,5 +180,6 @@ const createGrid = (width, height) => {
 };
 
 module.exports = {
-  findPercentFull
+  findPercentFull,
+  createGrid // exported for testing security bounds
 };
