@@ -106,31 +106,43 @@ const processGrid = (config, type) => {
   return countGrid(grid);
 };
 
-const insertIntoGrid = (posx, posy, grid, config) => {
-  grid[posx][posy] = 1;
-  // Top left
-  const topLeftposx = posx - (config.insertHop);
-  const topLeftposy = posy - (config.altInsertHop);
-  if (topLeftposx >= 0 && topLeftposy >=0 && !grid[topLeftposx][topLeftposy]){
-    insertIntoGrid(topLeftposx, topLeftposy, grid, config);
-  }
-  // Top Right
-  const topRightposx = posx + (config.altInsertHop);
-  const topRightposy = posy - (config.insertHop);
-  if (topRightposx < config.width && topRightposy >=0 && !grid[topRightposx][topRightposy]){
-    insertIntoGrid(topRightposx, topRightposy, grid, config);
-  }
-  // Bottom Left
-  const bottomLeftposx = posx - (config.altInsertHop);
-  const bottomLeftposy = posy + (config.insertHop);
-  if (bottomLeftposx >= 0 && bottomLeftposy < config.height && !grid[bottomLeftposx][bottomLeftposy]){
-    insertIntoGrid(bottomLeftposx, bottomLeftposy, grid, config);
-  }
-  // Bottom Right
-  const bottomRightposx = posx + (config.insertHop);
-  const bottomRightposy = posy + (config.altInsertHop);
-  if (bottomRightposx < config.width && bottomRightposy < config.height && !grid[bottomRightposx][bottomRightposy]){
-    insertIntoGrid(bottomRightposx, bottomRightposy, grid, config);
+const insertIntoGrid = (startx, starty, grid, config) => {
+  const stackX = [startx];
+  const stackY = [starty];
+  while (stackX.length > 0) {
+    const posx = stackX.pop();
+    const posy = stackY.pop();
+    if (grid[posx][posy]) continue;
+    grid[posx][posy] = 1;
+
+    // Top left
+    const topLeftposx = posx - (config.insertHop);
+    const topLeftposy = posy - (config.altInsertHop);
+    if (topLeftposx >= 0 && topLeftposy >= 0 && !grid[topLeftposx][topLeftposy]) {
+      stackX.push(topLeftposx);
+      stackY.push(topLeftposy);
+    }
+    // Top Right
+    const topRightposx = posx + (config.altInsertHop);
+    const topRightposy = posy - (config.insertHop);
+    if (topRightposx < config.width && topRightposy >= 0 && !grid[topRightposx][topRightposy]) {
+      stackX.push(topRightposx);
+      stackY.push(topRightposy);
+    }
+    // Bottom Left
+    const bottomLeftposx = posx - (config.altInsertHop);
+    const bottomLeftposy = posy + (config.insertHop);
+    if (bottomLeftposx >= 0 && bottomLeftposy < config.height && !grid[bottomLeftposx][bottomLeftposy]) {
+      stackX.push(bottomLeftposx);
+      stackY.push(bottomLeftposy);
+    }
+    // Bottom Right
+    const bottomRightposx = posx + (config.insertHop);
+    const bottomRightposy = posy + (config.altInsertHop);
+    if (bottomRightposx < config.width && bottomRightposy < config.height && !grid[bottomRightposx][bottomRightposy]) {
+      stackX.push(bottomRightposx);
+      stackY.push(bottomRightposy);
+    }
   }
 };
 
