@@ -176,8 +176,8 @@ const countGrid = (grid) => {
 };
 
 const createGrid = (width, height) => {
-  if (typeof width !== 'number' || isNaN(width) || typeof height !== 'number' || isNaN(height)) {
-    throw new Error('Grid dimensions must be valid numbers');
+  if (!Number.isInteger(width) || width <= 0 || !Number.isInteger(height) || height <= 0) {
+    throw new Error('Grid dimensions must be valid positive integers');
   }
   if (width > 25000000 || height > 25000000 || width * height > 25000000) {
     throw new Error('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
