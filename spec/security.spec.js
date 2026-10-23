@@ -27,15 +27,23 @@ describe('Security and edge cases', () => {
   it('should prevent OOM limits bypass with 0 or NaN directly on internal allocation calls', () => {
     expect(() => {
       gridDensity.createGrid(100000000, 0);
-    }).toThrowError('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
+    }).toThrowError('Grid dimensions must be valid positive integers');
 
     expect(() => {
       gridDensity.createGrid("100", 100);
-    }).toThrowError('Grid dimensions must be valid numbers');
+    }).toThrowError('Grid dimensions must be valid positive integers');
 
     expect(() => {
       gridDensity.createGrid(NaN, 100);
-    }).toThrowError('Grid dimensions must be valid numbers');
+    }).toThrowError('Grid dimensions must be valid positive integers');
+
+    expect(() => {
+      gridDensity.createGrid(-1, 100);
+    }).toThrowError('Grid dimensions must be valid positive integers');
+
+    expect(() => {
+      gridDensity.createGrid(100, 1.5);
+    }).toThrowError('Grid dimensions must be valid positive integers');
   });
 
 });
