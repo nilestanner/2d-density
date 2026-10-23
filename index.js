@@ -185,7 +185,7 @@ const createGrid = (width, height) => {
   // Pre-allocate array and use standard loops for better performance.
   const grid = new Array(width);
   for (let i = 0; i < width; i++) {
-    grid[i] = new Array(height).fill(0);
+    grid[i] = new Uint8Array(height);
   }
   return grid;
 };
