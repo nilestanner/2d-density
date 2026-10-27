@@ -16,3 +16,8 @@
 **Vulnerability:** Weak type checking on dimensions (`typeof width !== 'number'`) allowed negative numbers and floating point inputs to reach JavaScript's `new Array(size)` instantiation. This triggered unhandled `RangeError: Invalid array length` exceptions that crashed the Node.js application, resulting in a Denial of Service (DoS).
 **Learning:** Checking that a variable is a "number" is insufficient if it will be used for array lengths, which strictly require positive integers.
 **Prevention:** Always validate numeric array size inputs with strict `Number.isInteger(val) && val > 0` constraints before performing pre-allocations.
+
+## 2026-10-27 - [Array Object Allocation Overhead DoS]
+**Vulnerability:** Even when the total grid area (`width * height`) was safely constrained, an attacker could supply `width=25000000, height=1`, triggering the allocation of 25,000,000 array objects. This excessive V8 object allocation overhead caused Out-Of-Memory (OOM) crashes in Node.js (DoS).
+**Learning:** Checking the product of dimensions is not sufficient for memory allocation limits; the absolute number of objects instantiated (like the outer dimension in a 2D array) must also be independently constrained because object metadata has a high memory cost.
+**Prevention:** Enforce explicit upper limits on the absolute number of individual array objects allocated (e.g., `width > 5000000`), independently from the total area.

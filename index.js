@@ -179,7 +179,7 @@ const createGrid = (width, height) => {
   if (!Number.isInteger(width) || width <= 0 || !Number.isInteger(height) || height <= 0) {
     throw new Error('Grid dimensions must be valid positive integers');
   }
-  if (width > 25000000 || height > 25000000 || width * height > 25000000) {
+  if (width > 5000000 || height > 25000000 || width * height > 25000000) {
     throw new Error('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
   }
   // Pre-allocate array and use standard loops for better performance.

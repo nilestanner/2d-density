@@ -22,6 +22,21 @@ describe('Security and edge cases', () => {
     expect(() => {
       gridDensity.findPercentFull(30000, 30000, 30000);
     }).toThrowError('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
+
+    // Check width limit independently
+    expect(() => {
+      gridDensity.createGrid(5000001, 1);
+    }).toThrowError('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
+
+    // Check height limit independently
+    expect(() => {
+      gridDensity.createGrid(1, 25000001);
+    }).toThrowError('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
+
+    // Check area limit independently
+    expect(() => {
+      gridDensity.createGrid(5001, 5001);
+    }).toThrowError('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
   });
 
   it('should prevent OOM limits bypass with 0 or NaN directly on internal allocation calls', () => {
