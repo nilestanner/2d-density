@@ -183,9 +183,11 @@ const createGrid = (width, height) => {
     throw new Error('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
   }
   // Pre-allocate array and use standard loops for better performance.
+  // Use Uint8Array instead of new Array(height).fill(0) to significantly
+  // reduce memory footprint and instantiation time for large numerical grids.
   const grid = new Array(width);
   for (let i = 0; i < width; i++) {
-    grid[i] = new Array(height).fill(0);
+    grid[i] = new Uint8Array(height);
   }
   return grid;
 };
