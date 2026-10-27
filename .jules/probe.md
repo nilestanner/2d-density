@@ -12,3 +12,7 @@
 ## 2024-10-24 - Identifying untested math and boundary limits despite 100% coverage
 **Learning:** Found that `npx nyc` can report 100% statement and branch coverage even if intermediate math values (`remainerBlockCount`) or bounds checks (`<= 0`) are not explicitly asserted in the tests because the logic execution doesn't throw and seamlessly merges with broader test expectations. Using manual mutation testing (swapping `<` to `>`, changing mathematical increments) is essential to find specific un-asserted logic paths in dense mathematical modules.
 **Action:** Do not trust 100% NYC coverage as proof of correctness in algorithms with extensive math calculations. Actively use mutation testing techniques to probe which boundary conditions actually fail existing tests, and explicitly add focused, assertion-heavy tests for gaps uncovered.
+
+## 2026-10-27 - Testing OR conditions in bounds checks
+**Learning:** Found that `npx nyc` can report 100% statement and branch coverage on multi-condition OR statements (like `width > X || height > X || width * height > X`) even when only one part of the condition (e.g. `width * height > X`) is actually exercised by tests.
+**Action:** Multi-conditional circuit breakers, like OOM checks, require independent test coverage for each condition to prevent mutation vulnerabilities masking test gaps.
