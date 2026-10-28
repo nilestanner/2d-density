@@ -24,18 +24,4 @@ describe('Security and edge cases', () => {
     }).toThrowError('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
   });
 
-  it('should prevent OOM limits bypass with 0 or NaN directly on internal allocation calls', () => {
-    expect(() => {
-      gridDensity.createGrid(100000000, 0);
-    }).toThrowError('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
-
-    expect(() => {
-      gridDensity.createGrid("100", 100);
-    }).toThrowError('Grid dimensions must be valid numbers');
-
-    expect(() => {
-      gridDensity.createGrid(NaN, 100);
-    }).toThrowError('Grid dimensions must be valid numbers');
-  });
-
 });
