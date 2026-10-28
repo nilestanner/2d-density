@@ -46,4 +46,10 @@ describe('Security and edge cases', () => {
     }).toThrowError('Grid dimensions must be valid positive integers');
   });
 
+  it('should prevent massive array object allocations via high width / small height bypass', () => {
+    expect(() => {
+      gridDensity.createGrid(2000001, 1);
+    }).toThrowError('Grid width exceeds maximum allowed limit for array allocations to prevent Out of Memory errors');
+  });
+
 });

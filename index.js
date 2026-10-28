@@ -182,6 +182,9 @@ const createGrid = (width, height) => {
   if (width > 25000000 || height > 25000000 || width * height > 25000000) {
     throw new Error('Grid size exceeds maximum allowed limit to prevent Out of Memory errors');
   }
+  if (width > 2000000) {
+    throw new Error('Grid width exceeds maximum allowed limit for array allocations to prevent Out of Memory errors');
+  }
   // Pre-allocate array and use standard loops for better performance.
   const grid = new Array(width);
   for (let i = 0; i < width; i++) {
