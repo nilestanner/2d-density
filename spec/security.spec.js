@@ -48,7 +48,7 @@ describe('Security and edge cases', () => {
 
   it('should prevent massive array object allocations via high width / small height bypass', () => {
     expect(() => {
-      gridDensity.createGrid(10000000, 2);
+      gridDensity.createGrid(2000001, 1);
     }).toThrowError('Grid width exceeds maximum allowed limit for array allocations to prevent Out of Memory errors');
   });
 
