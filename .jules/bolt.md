@@ -5,3 +5,7 @@
 ## 2026-10-27 - Typed Arrays for Large Numerical Grids
 **Learning:** Initializing large 2D grids with `new Array(size).fill(0)` introduces significant memory overhead and slow instantiation time due to V8's array object allocation.
 **Action:** Use Typed Arrays like `Uint8Array` when pre-allocating large simple numerical grids to drastically lower memory footprint and instantiation time.
+
+## 2026-10-28 - Typed Arrays break exported APIs
+**Learning:** Changing standard Arrays to Typed Arrays (like Uint8Array) in exported functions changes the API surface (e.g. Array.isArray, serialization, available methods) and can break compatibility for consumers expecting standard arrays.
+**Action:** Do not use Typed Arrays for data structures that are exported as part of the public API unless explicitly permitted or if they were already typed arrays.
