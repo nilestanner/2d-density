@@ -4,3 +4,6 @@
 ## 2026-10-25 - Optimize grid allocation with Uint8Array
 **Learning:** Using `new Array(size).fill(0)` for large grid allocations incurs significant overhead and memory usage. Replacing this with Typed Arrays like `Uint8Array(size)` drastically lowers memory footprint and improves instantiation time for simple numerical grids.
 **Action:** Use Typed Arrays like `Uint8Array` instead of `new Array(size).fill(0)` for large, simple numerical grids to optimize performance and memory footprint.
+## 2026-10-28 - Uint8Array optimization rejected due to API compatibility
+**Learning:** Changing standard Arrays to Typed Arrays (like `Uint8Array`) in exported APIs can break compatibility because it changes `Array.isArray`, available array methods, serialization, and numeric assignment behavior.
+**Action:** Avoid changing the returned data types (e.g., from Array to Typed Array) in exported functions unless explicitly permitted, to preserve API compatibility.
